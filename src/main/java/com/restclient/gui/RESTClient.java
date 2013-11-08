@@ -1,6 +1,7 @@
 package com.restclient.gui;
 
-import com.restclient.listener.SendButtonListener;
+import com.restclient.listener.HotelActionListener;
+import com.restclient.listener.UserActionListener;
 
 import javax.swing.*;
 
@@ -12,12 +13,20 @@ import javax.swing.*;
 public class RESTClient {
     private JPanel mainPanel;
     private JTextField hostField;
-    private JTextField queryField;
     private JTextPane responsePane;
     private JButton sendButton;
+    private JButton hotelByIdButton;
+    private JButton allHotelsButton;
+    private JTextField hotelIdField;
+    private JTextField userIdField;
+    private JButton userByIdButton;
+    private JButton allUsersButton;
 
     public RESTClient() {
-        sendButton.addActionListener(new SendButtonListener(responsePane));
+        hotelByIdButton.addActionListener(new HotelActionListener(responsePane, hotelIdField));
+        userByIdButton.addActionListener(new UserActionListener(responsePane, userIdField));
+        allHotelsButton.addActionListener(new HotelActionListener(responsePane, hotelIdField));
+        allUsersButton.addActionListener(new UserActionListener(responsePane, userIdField));
     }
 
     /**
@@ -32,7 +41,7 @@ public class RESTClient {
         JPanel mainContent = new RESTClient().mainPanel;
         mainContent.setOpaque(true);
         frame.setContentPane(mainContent);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
