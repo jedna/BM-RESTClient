@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.ws.rs.BadRequestException;
 import java.util.List;
 
 
@@ -21,7 +22,8 @@ public class HotelClientTest
     @Before
     public void setUp()
     {
-        hotelClient = new HotelClient("http://bookingmanager.apiary.io");
+        hotelClient = new HotelClient("http://localhost:8080/bm-web/api/hotel");
+//        hotelClient = new HotelClient("http://bookingmanager.apiary.io");
     }
 
     @After
@@ -51,5 +53,24 @@ public class HotelClientTest
         // Run assertions against the response
         Assert.assertNotNull( "Hotel should not be null", hotels );
         Assert.assertEquals( "Hotels count is incorrect", 2, hotels.size() );
+    }
+
+    @Test
+    public void testCreateHotel()
+    {
+        // Query for the book with id "123"
+        Hotel hotel = hotelClient.getHotel("1");
+
+
+        Hotel hotel2 = null;
+        try {
+            hotel2 = hotelClient.createHotel(hotel);
+        } catch (BadRequestException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            System.out.print(e.getMessage());
+        }
+
+        // Run assertions against the response
+        Assert.assertEquals("Hotels are not the same", hotel.getName(), hotel2.getName());
     }
 }

@@ -1,14 +1,8 @@
 package com.restclient.client;
 
-/**
- * User: jenda_000
- * Date: 31.10.13
- * Time: 21:40
- */
-
-
 import com.restclient.model.Hotel;
 
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
@@ -17,6 +11,7 @@ import java.util.List;
 
 /**
  * Client that knows how to interact with the Hotel REST web service
+ *
  * @author Jan Hrubeš
  */
 public class HotelClient extends BaseClient
@@ -32,16 +27,11 @@ public class HotelClient extends BaseClient
      */
     public List<Hotel> getHotels()
     {
-        WebTarget hotelResource = this.resource.path("hotels");
+        WebTarget hotelResource = this.resource.path("");
 
         Invocation.Builder builder = hotelResource.request(MediaType.APPLICATION_JSON);
 
-        // Set the path from which we wish to get the object, request XML, and use JAXB
-        // to convert the response to a Book object
-        List<Hotel> hotels = builder.get( new GenericType<List<Hotel>>() {});
-
-        // Return the book from the server
-        return hotels;
+        return builder.get( new GenericType<List<Hotel>>() {});
     }
 
     /**
@@ -53,16 +43,19 @@ public class HotelClient extends BaseClient
      */
     public Hotel getHotel( String id )
     {
-        WebTarget hotelResource = this.resource.path("hotel/" + id);
+        WebTarget hotelResource = this.resource.path("get/" + id);
 
         Invocation.Builder builder = hotelResource.request(MediaType.APPLICATION_JSON);
 
-        Hotel hotel = builder.get(Hotel.class);
+        return builder.get(Hotel.class);
+    }
 
-        // Set the path from which we wish to get the object, request XML, and use JAXB
-        // to convert the response to a Book object
+    public Hotel createHotel(Hotel hotel)
+    {
+        WebTarget hotelResource = this.resource.path("create");
 
-        // Return the book from the server
-        return hotel;
+        Invocation.Builder builder = hotelResource.request();
+
+        return builder.post(Entity.json(hotel), Hotel.class);
     }
 }

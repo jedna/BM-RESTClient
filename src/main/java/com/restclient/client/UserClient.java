@@ -29,12 +29,7 @@ public class UserClient extends BaseClient
 
         Invocation.Builder builder = userResource.request(MediaType.APPLICATION_JSON);
 
-        // Set the path from which we wish to get the object, request XML, and use JAXB
-        // to convert the response to a Book object
-        List<User> users = builder.get( new GenericType<List<User>>() {});
-
-        // Return the book from the server
-        return users;
+        return builder.get( new GenericType<List<User>>() {});
     }
 
     /**
@@ -50,12 +45,6 @@ public class UserClient extends BaseClient
 
         Invocation.Builder builder = userResource.request(MediaType.APPLICATION_JSON);
 
-        User user = builder.get(User.class);
-
-        // Set the path from which we wish to get the object, request XML, and use JAXB
-        // to convert the response to a Book object
-
-        // Return the book from the server
-        return user;
+        return builder.get(User.class);
     }
 }
