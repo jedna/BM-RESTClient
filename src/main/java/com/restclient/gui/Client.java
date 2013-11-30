@@ -1,5 +1,8 @@
 package com.restclient.gui;
 
+import com.restclient.client.HotelClient;
+import com.restclient.listener.*;
+
 import javax.swing.*;
 
 /**
@@ -13,16 +16,26 @@ public class Client {
     private JPanel hotelPanel;
     private JPanel userPanel;
     private JTextField newHotelNameField;
-    private JButton createButton;
+    private JButton createHotelButton;
     private JTextField updateHotelIdField;
     private JTextField updateHotelNameField;
-    private JButton updateButton;
+    private JButton updateHotelButton;
     private JTextField deleteHotelIdField;
-    private JButton deleteButton;
+    private JButton deleteHotelButton;
     private JTextField getHotelIdField;
-    private JButton getButton;
-    private JButton getAllButton;
-    private JTextPane responsePanel;
+    private JButton getHotelButton;
+    private JButton getAllHotelsButton;
+    private JTextPane hotelResponsePanel;
+
+    public Client() {
+        HotelClient hotelClient = new HotelClient();
+
+        createHotelButton.addActionListener(new CreateHotelListener(hotelClient, newHotelNameField, hotelResponsePanel));
+        getHotelButton.addActionListener(new GetHotelListener(hotelClient, getHotelIdField, hotelResponsePanel));
+        getAllHotelsButton.addActionListener(new GetAllHotelsListener(hotelClient, hotelResponsePanel));
+        updateHotelButton.addActionListener(new UpdateHotelListener(hotelClient, updateHotelIdField, updateHotelNameField, hotelResponsePanel));
+        deleteHotelButton.addActionListener(new DeleteHotelListener(hotelClient, deleteHotelIdField, hotelResponsePanel));
+    }
 
     public static void main(String[] args) {
         //Schedule a job for the event-dispatching thread:

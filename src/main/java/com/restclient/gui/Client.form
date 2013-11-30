@@ -44,7 +44,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="4cf21" class="javax.swing.JButton" binding="createButton" default-binding="true">
+              <component id="4cf21" class="javax.swing.JButton" binding="createHotelButton">
                 <constraints>
                   <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -93,7 +93,7 @@
                   <text value="Name:"/>
                 </properties>
               </component>
-              <component id="58ebe" class="javax.swing.JButton" binding="updateButton" default-binding="true">
+              <component id="58ebe" class="javax.swing.JButton" binding="updateHotelButton">
                 <constraints>
                   <grid row="8" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -134,7 +134,7 @@
                   <text value="Id:"/>
                 </properties>
               </component>
-              <component id="93575" class="javax.swing.JButton" binding="deleteButton" default-binding="true">
+              <component id="93575" class="javax.swing.JButton" binding="deleteHotelButton">
                 <constraints>
                   <grid row="11" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -200,7 +200,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="83cce" class="javax.swing.JButton" binding="getAllButton" default-binding="true">
+              <component id="83cce" class="javax.swing.JButton" binding="getAllHotelsButton">
                 <constraints>
                   <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -208,7 +208,7 @@
                   <text value="Get all"/>
                 </properties>
               </component>
-              <component id="b1bdb" class="javax.swing.JButton" binding="getButton" default-binding="true">
+              <component id="b1bdb" class="javax.swing.JButton" binding="getHotelButton">
                 <constraints>
                   <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -216,7 +216,7 @@
                   <text value="Get"/>
                 </properties>
               </component>
-              <component id="faf72" class="javax.swing.JTextPane" binding="responsePanel">
+              <component id="faf72" class="javax.swing.JTextPane" binding="hotelResponsePanel">
                 <constraints>
                   <grid row="14" column="0" row-span="1" col-span="5" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="50"/>

@@ -21,7 +21,8 @@ public class UserClientTest
     @Before
     public void setUp()
     {
-        userClient = new UserClient("http://bookingmanager.apiary.io");
+        userClient = new UserClient();
+        userClient.setBaseUrl("http://bookingmanager.apiary.io");
     }
 
     @After
@@ -34,7 +35,7 @@ public class UserClientTest
     public void testGetUser()
     {
         // Query for the book with id "123"
-        User user = userClient.getUser("1");
+        User user = userClient.getUser(1L);
 
         // Run assertions against the response
         Assert.assertNotNull( "user should not be null", user );

@@ -10,17 +10,20 @@ import javax.ws.rs.client.WebTarget;
 public class BaseClient {
 
     private String baseUrl;
-    protected WebTarget resource;
 
     /**
      * Constructor
-     * @param baseUrl
      */
-    public BaseClient(String baseUrl)
+    public BaseClient()
     {
-        this.baseUrl = baseUrl;
+        // default URL
+        this.baseUrl = "http://localhost:8080/rest";
+    }
+
+    public WebTarget getResource()
+    {
         Client client = ClientBuilder.newClient();
-        this.resource = client.target(baseUrl);
+        return client.target(baseUrl);
     }
 
     public String getBaseUrl()

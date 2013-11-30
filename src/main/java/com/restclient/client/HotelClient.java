@@ -14,10 +14,11 @@ import java.util.List;
  *
  * @author Jan Hrubeš
  */
+
 public class HotelClient extends BaseClient
 {
-    public HotelClient(String baseUrl) {
-        super(baseUrl);
+    public HotelClient() {
+        this.setBaseUrl("http://localhost:8080/rest/hotel");
     }
 
     /**
@@ -27,7 +28,7 @@ public class HotelClient extends BaseClient
      */
     public List<Hotel> getHotels()
     {
-        WebTarget hotelResource = this.resource.path("");
+        WebTarget hotelResource = this.getResource().path("");
 
         Invocation.Builder builder = hotelResource.request(MediaType.APPLICATION_JSON);
 
@@ -41,9 +42,9 @@ public class HotelClient extends BaseClient
      *
      * @return          A Hotel object representing the response from the RESTful web service
      */
-    public Hotel getHotel( String id )
+    public Hotel getHotel( Long id )
     {
-        WebTarget hotelResource = this.resource.path("get/" + id);
+        WebTarget hotelResource = this.getResource().path(id.toString());
 
         Invocation.Builder builder = hotelResource.request(MediaType.APPLICATION_JSON);
 
@@ -52,7 +53,7 @@ public class HotelClient extends BaseClient
 
     public Hotel createHotel(Hotel hotel)
     {
-        WebTarget hotelResource = this.resource.path("create");
+        WebTarget hotelResource = this.getResource().path("create");
 
         Invocation.Builder builder = hotelResource.request();
 

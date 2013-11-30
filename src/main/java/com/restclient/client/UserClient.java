@@ -14,8 +14,8 @@ import java.util.List;
  */
 public class UserClient extends BaseClient
 {
-    public UserClient(String baseUrl) {
-        super(baseUrl);
+    public UserClient() {
+        this.setBaseUrl("http://localhost:8080/rest/user");
     }
 
     /**
@@ -25,7 +25,7 @@ public class UserClient extends BaseClient
      */
     public List<User> getUsers()
     {
-        WebTarget userResource = this.resource.path("users");
+        WebTarget userResource = this.getResource().path("");
 
         Invocation.Builder builder = userResource.request(MediaType.APPLICATION_JSON);
 
@@ -39,9 +39,9 @@ public class UserClient extends BaseClient
      *
      * @return User     A User object representing the response from the RESTful web service
      */
-    public User getUser( String id )
+    public User getUser( Long id )
     {
-        WebTarget userResource = this.resource.path("user/" + id);
+        WebTarget userResource = this.getResource().path(id.toString());
 
         Invocation.Builder builder = userResource.request(MediaType.APPLICATION_JSON);
 

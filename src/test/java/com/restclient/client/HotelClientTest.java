@@ -22,7 +22,8 @@ public class HotelClientTest
     @Before
     public void setUp()
     {
-        hotelClient = new HotelClient("http://localhost:8080/bm-web/api/hotel");
+        hotelClient = new HotelClient();
+        hotelClient.setBaseUrl("http://localhost:8080/bm-web/api/hotel");
 //        hotelClient = new HotelClient("http://bookingmanager.apiary.io");
     }
 
@@ -36,7 +37,7 @@ public class HotelClientTest
     public void testGetHotel()
     {
         // Query for the book with id "123"
-        Hotel hotel = hotelClient.getHotel("1");
+        Hotel hotel = hotelClient.getHotel(1L);
 
         // Run assertions against the response
         Assert.assertNotNull( "Hotel should not be null", hotel );
@@ -59,7 +60,7 @@ public class HotelClientTest
     public void testCreateHotel()
     {
         // Query for the book with id "123"
-        Hotel hotel = hotelClient.getHotel("1");
+        Hotel hotel = hotelClient.getHotel(1L);
 
 
         Hotel hotel2 = null;
@@ -71,6 +72,7 @@ public class HotelClientTest
         }
 
         // Run assertions against the response
+        Assert.assertNotNull( "Hotel should not be null", hotel2 );
         Assert.assertEquals("Hotels are not the same", hotel.getName(), hotel2.getName());
     }
 }
