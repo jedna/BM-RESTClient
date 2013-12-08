@@ -1,8 +1,10 @@
 package com.restclient.listener;
 
 import com.restclient.client.HotelClient;
+import com.restclient.model.Hotel;
 
 import javax.swing.*;
+import javax.ws.rs.core.Response;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -36,10 +38,15 @@ public class UpdateHotelListener implements ActionListener {
             return;
         }
         try {
-            hotelResponsePanel.setText("Update hotel ID: " + Long.parseLong(updateHotelIdField.getText()) + " and NAME: " + updateHotelNameField.getText());
+            Hotel hotel = new Hotel();
+            hotel.setId(Long.parseLong(updateHotelIdField.getText()));
+            hotel.setName(updateHotelNameField.getText());
+
+            Response response = hotelClient.updateHotel(hotel);
+
+            hotelResponsePanel.setText("Update hotel ID: " + hotel.getId() + " and NAME: " + hotel.getName() + "\nResponse: " + response.getStatus());
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID has to be a number.", "Numeric ID required", JOptionPane.ERROR_MESSAGE);
-            return;
         }
     }
 }

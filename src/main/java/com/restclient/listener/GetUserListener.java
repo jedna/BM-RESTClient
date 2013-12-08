@@ -1,7 +1,7 @@
 package com.restclient.listener;
 
-import com.restclient.client.HotelClient;
-import com.restclient.model.Hotel;
+import com.restclient.client.UserClient;
+import com.restclient.model.User;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,31 +12,31 @@ import java.awt.event.ActionListener;
  * Date: 30.11.13
  * Time: 18:06
  */
-public class GetHotelListener implements ActionListener {
+public class GetUserListener implements ActionListener {
 
-    private HotelClient hotelClient;
-    private JTextField getHotelIdField;
-    private JTextPane hotelResponsePanel;
+    private UserClient userClient;
+    private JTextField getUserIdField;
+    private JTextPane userResponsePanel;
 
-    public GetHotelListener(HotelClient hotelClient, JTextField getHotelIdField, JTextPane hotelResponsePanel) {
-        this.hotelClient = hotelClient;
-        this.getHotelIdField = getHotelIdField;
-        this.hotelResponsePanel = hotelResponsePanel;
+    public GetUserListener(UserClient userClient, JTextField getUserIdField, JTextPane userResponsePanel) {
+        this.userClient = userClient;
+        this.getUserIdField = getUserIdField;
+        this.userResponsePanel = userResponsePanel;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (getHotelIdField.getText().equals("")) {
+        if (getUserIdField.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "You have to fill ID first.", "ID required", JOptionPane.ERROR_MESSAGE);
             return;
         }
         try {
-            Long hotelId = Long.parseLong(getHotelIdField.getText());
-            Hotel hotel = hotelClient.getHotel(hotelId);
-            if (hotel == null) {
-                hotelResponsePanel.setText("Hotel does not exist.");
+            Long userId = Long.parseLong(getUserIdField.getText());
+            User user = userClient.getUser(userId);
+            if (user == null) {
+                userResponsePanel.setText("User does not exist.");
             } else {
-                hotelResponsePanel.setText("ID: " + hotel.getId() + ", NAME: " + hotel.getName());
+                userResponsePanel.setText("ID: " + user.getId() + ", NAME: " + user.getEmail() + ", ROLE: " + user.getRoleByRoleId().getName());
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID has to be a number.", "Numeric ID required", JOptionPane.ERROR_MESSAGE);

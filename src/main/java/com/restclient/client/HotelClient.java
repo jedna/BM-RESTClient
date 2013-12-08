@@ -7,6 +7,7 @@ import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
@@ -17,8 +18,8 @@ import java.util.List;
 
 public class HotelClient extends BaseClient
 {
-    public HotelClient() {
-        this.setBaseUrl("http://localhost:8080/rest/hotel");
+    public HotelClient(String url) {
+        this.setBaseUrl(url + "/hotel");
     }
 
     /**
@@ -51,12 +52,49 @@ public class HotelClient extends BaseClient
         return builder.get(Hotel.class);
     }
 
-    public Hotel createHotel(Hotel hotel)
+    /**
+     * Queries the RESTful web service for creating new hotel
+     *
+     * @param hotel  Hotel entity to create
+     * @return
+     */
+    public Response createHotel(Hotel hotel)
     {
         WebTarget hotelResource = this.getResource().path("create");
-
         Invocation.Builder builder = hotelResource.request();
 
-        return builder.post(Entity.json(hotel), Hotel.class);
+        Entity<Hotel> entity = Entity.entity(hotel, MediaType.APPLICATION_JSON);
+
+        return builder.post(entity);
+    }
+
+    /**
+     * Queries the RESTful web service for deleting hotel
+     *
+     * @param id  Hotel id to delete
+     * @return
+     */
+    public Response deleteHotel(Long id)
+    {
+        WebTarget hotelResource = this.getResource().path(id.toString());
+        Invocation.Builder builder = hotelResource.request();
+
+        return builder.delete();
+    }
+
+    /**
+     * Queries the RESTful web service for updating hotel
+     *
+     * @param hotel  Hotel entity to update
+     * @return
+     */
+    public Response updateHotel(Hotel hotel)
+    {
+        WebTarget hotelResource = this.getResource().path(hotel.getId().toString());
+        Invocation.Builder builder = hotelResource.request();
+
+        Entity<Hotel> entity = Entity.entity(hotel, MediaType.APPLICATION_JSON);
+
+        return builder.put(entity);
     }
 }

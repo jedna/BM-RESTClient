@@ -21,8 +21,7 @@ public class UserClientTest
     @Before
     public void setUp()
     {
-        userClient = new UserClient();
-        userClient.setBaseUrl("http://bookingmanager.apiary.io");
+        userClient = new UserClient("http://bookingmanager.apiary.io");
     }
 
     @After

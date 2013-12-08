@@ -22,9 +22,8 @@ public class HotelClientTest
     @Before
     public void setUp()
     {
-        hotelClient = new HotelClient();
-        hotelClient.setBaseUrl("http://localhost:8080/bm-web/api/hotel");
-//        hotelClient = new HotelClient("http://bookingmanager.apiary.io");
+        hotelClient = new HotelClient("http://bookingmanager.apiary.io");
+//        hotelClient.setBaseUrl("http://localhost:8080/rest/hotel");
     }
 
     @After
@@ -42,7 +41,7 @@ public class HotelClientTest
         // Run assertions against the response
         Assert.assertNotNull( "Hotel should not be null", hotel );
         Assert.assertEquals("Hotel id is incorrect", (Long) 1L, hotel.getId());
-        Assert.assertEquals("Hotel name is incorrect", "Hotel Savoy", hotel.getName());
+        Assert.assertEquals("Hotel name is incorrect", "Imperial", hotel.getName());
     }
 
     @Test
@@ -53,7 +52,7 @@ public class HotelClientTest
 
         // Run assertions against the response
         Assert.assertNotNull( "Hotel should not be null", hotels );
-        Assert.assertEquals( "Hotels count is incorrect", 2, hotels.size() );
+        Assert.assertEquals( "Hotels count is incorrect", 3, hotels.size() );
     }
 
     @Test
@@ -65,7 +64,7 @@ public class HotelClientTest
 
         Hotel hotel2 = null;
         try {
-            hotel2 = hotelClient.createHotel(hotel);
+            hotel2 = (Hotel) hotelClient.createHotel(hotel).getEntity();
         } catch (BadRequestException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             System.out.print(e.getMessage());

@@ -1,7 +1,7 @@
 package com.restclient.listener;
 
-import com.restclient.client.HotelClient;
-import com.restclient.model.Hotel;
+import com.restclient.client.UserClient;
+import com.restclient.model.User;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,24 +12,24 @@ import java.awt.event.ActionListener;
  * Date: 30.11.13
  * Time: 18:10
  */
-public class GetAllHotelsListener implements ActionListener {
+public class GetAllUsersListener implements ActionListener {
 
-    private HotelClient hotelClient;
-    private JTextPane hotelResponsePanel;
+    private UserClient userClient;
+    private JTextPane userResponsePanel;
 
-    public GetAllHotelsListener(HotelClient hotelClient, JTextPane hotelResponsePanel) {
-        this.hotelClient = hotelClient;
-        this.hotelResponsePanel = hotelResponsePanel;
+    public GetAllUsersListener(UserClient userClient, JTextPane userResponsePanel) {
+        this.userClient = userClient;
+        this.userResponsePanel = userResponsePanel;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
             String output = "";
-            for (Hotel hotel: hotelClient.getHotels()) {
-                output += "ID: " + hotel.getId() + ", NAME: " + hotel.getName() + "\n";
+            for (User user: userClient.getUsers()) {
+                output += "ID: " + user.getId() + ", NAME: " + user.getEmail() + ", ROLE: " + user.getRoleByRoleId().getName() + "\n";
             }
-            hotelResponsePanel.setText(output);
+            userResponsePanel.setText(output);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID has to be a number.", "Numeric ID required", JOptionPane.ERROR_MESSAGE);
             return;
